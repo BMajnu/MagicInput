@@ -15,6 +15,8 @@ import datetime  # NEW
 import platform
 import threading
 from typing import Optional, Any
+import hashlib  # NEW
+import getpass  # NEW
 
 # Optional drag-and-drop via tkinterdnd2
 DND_SUPPORT = False
@@ -23,6 +25,32 @@ try:
     DND_SUPPORT = True
 except ImportError:
     pass
+
+# ---------------------- TAMPER PROTECTION ---------------------- #
+_EXPECTED_FILE_HASH = "7C21C69C532822378BF3B0A8F9092480A48FCC6B5C3702594AB75E8AF8154B2D"
+_PASSKEY = "MajnuPass"
+
+def _verify_integrity() -> None:
+    """Check the current file hash; if it differs, ask for passkey."""
+    try:
+        with open(__file__, "rb") as _f:
+            data = _f.read()
+        current_hash = hashlib.sha256(data).hexdigest().upper()
+        if current_hash != _EXPECTED_FILE_HASH:
+            for _ in range(3):
+                entered = getpass.getpass("MagicInput integrity check failed. Enter passkey to continue: ")
+                if entered == _PASSKEY:
+                    print("[MagicInput] Warning: running in modified state.")
+                    return
+                print("Incorrect passkey. Try again.")
+            print("Maximum attempts exceeded. Exiting.")
+            sys.exit(1)
+    except Exception as exc:
+        print(f"[MagicInput] Integrity verification error: {exc}")
+        sys.exit(1)
+
+_verify_integrity()
+# -------------------- END TAMPER PROTECTION -------------------- #
 
 # ------------------------------------------------------------------ DEPENDENCY HANDLING
 
