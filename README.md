@@ -50,7 +50,7 @@ When the current task finishes, launch MagicInput and wait for the user's next c
 ## 🧪 Current Version
 
 * ✅ Supports: **plain text input**, **clipboard image paste**, **drag-and-drop images**
-* 🕑 Coming soon: file uploads via drag-and-drop
+* 🕑 Coming soon: New many features
 
 ---
 
