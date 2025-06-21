@@ -1,0 +1,71 @@
+Follow the user prompt and attachment (if have)
+------------------
+Prompt:
+পণ্য ও যন্ত্রাংশ (৪০%): ৪,০০,০০০ টাকা
+ল্যাপটপ/ডেস্কটপ (বিক্রয়ের জন্য প্রাথমিক স্টক): ১,৫০,০০০
+মোবাইল পার্টস (ডিসপ্লে, ব্যাটারি): ৮০,০০০
+কম্পিউটার কম্পোনেন্টস (র‍্যাম, SSD): ৭০,০০০
+প্রিন্টিং সামগ্রী (কাগজ, টোনার): ৫০,০০০
+অন্যান্য এক্সেসরিজ (কিবোর্ড, মাউস): ৫০,০০০
+
+Attachments:
+E:\App\Hotspot IT\HotspotIT\MagicInput\MagicPrompt Image 1.png
+------------------
+
+Follow the user prompt and attachment (if have)
+------------------
+Prompt:
+I want make the this first part 6 lac instead of 4 lac taka. and take it from the reserev. And properly devied it.
+
+Attachments:
+E:\App\Hotspot IT\HotspotIT\MagicInput\MagicInput Image 2.png
+------------------
+
+Follow the user prompt and attachment (if have)
+------------------
+Prompt:
+do it
+
+Attachments:
+None
+------------------
+
+Follow the user prompt and attachment (if have)
+------------------
+Prompt:
+Yes do it
+
+Attachments:
+None
+------------------
+
+Follow the user prompt and attachment (if have)
+------------------
+Prompt:
+Make the change in the index.himl.
+
+Attachments:
+None
+------------------
+
+Prompt:
+stop
+
+Attachments:
+None
+------------------
+
+Prompt:
+Hello!
+
+Attachments:
+Check the attachments:
+E:\App\Hotspot IT\HotspotIT\MagicInput\MagicInput Image 4.png
+
+Prompt:
+Hello!
+
+Attachments:
+Check the attachments:
+E:\App\Hotspot IT\HotspotIT\MagicInput\MagicInput Image 4.png
+
