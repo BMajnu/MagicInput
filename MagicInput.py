@@ -15,8 +15,6 @@ import datetime  # NEW
 import platform
 import threading
 from typing import Optional, Any
-import hashlib
-import getpass
 
 # Optional drag-and-drop via tkinterdnd2
 DND_SUPPORT = False
@@ -840,44 +838,6 @@ def main() -> None:
     app = InputPopup(root)
     root.protocol("WM_DELETE_WINDOW", lambda: (app.cleanup(), root.destroy()))
     root.mainloop()
-
-
-# ------------------------------------------------------------------ INTEGRITY PROTECTION (simple)
-CHECKSUM_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".MagicInput", ".checksum")
-PASSKEY = "MajnuSecure2025"  # change this to your secret
-
-def _compute_self_hash() -> str:
-    """Return SHA256 of this file (source)."""
-    with open(os.path.abspath(__file__), "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()
-
-def _verify_integrity() -> None:
-    """If code has been edited, request developer passkey before continuing."""
-    current_hash = _compute_self_hash()
-    # Ensure attachments dir exists already
-    os.makedirs(os.path.dirname(CHECKSUM_FILE), exist_ok=True)
-    if os.path.exists(CHECKSUM_FILE):
-        with open(CHECKSUM_FILE, "r", encoding="utf-8") as f:
-            stored_hash = f.read().strip()
-        if stored_hash == current_hash:
-            return  # No changes detected
-        try:
-            pass_attempt = getpass.getpass("MagicInput developer passkey required to accept code changes: ")
-        except Exception:
-            pass_attempt = input("Passkey: ")
-        if pass_attempt != PASSKEY:
-            messagebox.showerror("MagicInput", "Wrong passkey. Exiting.")
-            sys.exit(1)
-        with open(CHECKSUM_FILE, "w", encoding="utf-8") as f:
-            f.write(current_hash)
-            print("[MagicInput] Checksum updated – modifications accepted.")
-    else:
-        with open(CHECKSUM_FILE, "w", encoding="utf-8") as f:
-            f.write(current_hash)
-
-# Run integrity check before launching GUI
-_verify_integrity()
-# ------------------------------------------------------------------ END INTEGRITY PROTECTION
 
 
 if __name__ == "__main__":
