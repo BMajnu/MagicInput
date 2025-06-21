@@ -49,8 +49,16 @@ When the current task finishes, launch MagicInput and wait for the user's next c
 
 ## 🧪 Current Version
 
-* ✅ Supports: **plain text input**, **clipboard image paste**, **drag-and-drop images**
-* 🕑 Coming soon: New many features
+* ✅ **Plain-text input** in a comfy, resizable text area
+* ✅ **Attach multiple screenshots** via drag-and-drop, file picker or direct clipboard paste (<kbd>Ctrl/⌘</kbd>+<kbd>V</kbd>)
+* ✅ **Image carousel** with preview, next/prev navigation, removal and counter
+* ✅ **Dark ↔ Light theme toggle** with a single click
+* ✅ **Custom frameless window** that you can drag anywhere
+* ✅ **Minimize to system-tray** on Windows (tray icon with Show / Exit)
+* ✅ **Send** & **Send + Close** buttons that print the prompt to stdout and log it to `.MagicInput/`
+* ✅ **Hover feedback** on every control for a polished UX
+* ✅ **Auto-installs dependencies** (`pillow`, `pystray`, optional `tkinterdnd2`) on first launch
+* ✅ **Cross-platform**: tested on Windows, macOS and Linux
 
 ---
 

@@ -69,3 +69,263 @@ Attachments:
 Check the attachments:
 E:\App\Hotspot IT\HotspotIT\MagicInput\MagicInput Image 4.png
 
+Prompt:
+add all the features here:
+
+## 🧪 Current Version
+
+* ✅ Supports: **plain text input**, **clipboard image paste**, **drag-and-drop images**
+
+Prompt:
+add all the features here:
+
+## 🧪 Current Version
+
+* ✅ Supports: **plain text input**, **clipboard image paste**, **drag-and-drop images**
+
+Prompt:
+add all the features here:
+
+## 🧪 Current Version
+
+* ✅ Supports: **plain text input**, **clipboard image paste**, **drag-and-drop images**
+
+
+@README.md
+
+Prompt:
+add all the features here:
+
+## 🧪 Current Version
+
+* ✅ Supports: **plain text input**, **clipboard image paste**, **drag-and-drop images**
+
+Prompt:
+I want to update the MagicInput app, it deosn't allow the attached codebase or mention any file like cursor or windsurf or any ide (mention with "@". Can you add this feature to it?
+
+Attachments:
+E:\App\MagicInput\.MagicInput\MagicInput Image 5.png
+
+Prompt:
+1. when user click on the att file it will open the app own directory (of the MagicInput app) and user will select the any file from here. check 1st img
+
+2. when user file "@" it will show a popup list of the files and files of own directory (of the MagicInput app) like the 2nd img
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 6.png
+@E:\App\MagicInput\.MagicInput\MagicInput Image 7.png
+
+Prompt:
+Make the ui upgrade the the popup like the 2ng img (before of the file or folder shows the icon/thumbnail of it.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 8.png
+@E:\App\MagicInput\.MagicInput\MagicInput Image 9.png
+
+Prompt:
+Now when user past any snipt code from any file in the prompt box you will find the code (throgh) the whole codebase and mentioned the (matched file) file automatically, but if it is matched to multiple file then show a popup to user select the correct file. check the attached imgs.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 10.png
+@E:\App\MagicInput\.MagicInput\MagicInput Image 11.png
+
+Prompt:
+Now when user past any snipt code from any file in the prompt box you will find the code (throgh) the whole codebase and mentioned the (matched file) file automatically, but if it is matched to multiple file then show a popup to user select the correct file. check the attached imgs.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 10.png
+@E:\App\MagicInput\.MagicInput\MagicInput Image 11.png
+
+Prompt:
+it not working after pasting the snipt code it will search and mention and shows matched lines instantly. (like the attached img) It doen't wait for any additional input.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 12.png
+
+Prompt:
+still not working
+
+Attachments:
+@E:\App\MagicInput\README.md
+
+Prompt:
+My mistake. tarminal result says (img 1) it's mentioned the file but not showing it in the UI, so add a popup line in the UI add always top a for mention files file, codes line count or image (name) or anything else in the dirrected part in the 2nd ss.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 13.png
+
+Prompt:
+it just mentioning the file (for code part attachment) but it should also mention the line range of the the selected part, also shows how many lines in the fle.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 15.png
+@E:\App\MagicInput\README.md
+
+Prompt:
+when user mention any file it also show in the top as well. 
+Also when use press the ctrl + enter button it will be send and close.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 16.png
+@E:\App\MagicInput\README.md (43-67/119)
+
+Prompt:
+attached mention (at the top) of the file not working.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 17.png
+
+Prompt:
+when use past the code it will not shows as code in the (text or code) box, it will show as mention file including noumber of lines and code including starting 2 and ending 2 words in a better way. so it will looks professional.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 18.png
+@E:\App\MagicInput\README.md (43-67/119)
+
+Prompt:
+then mentioned part should be in [].
+
+Attachments:
+@E:\App\MagicInput\README.md (43-67/119)
+@E:\App\MagicInput\README.md
+
+Prompt:
+If any mentioned file/code was deleted from the text or code box the it will be also removed from the mentioned bar as well.
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 19.png
+@E:\App\MagicInput\README.md (43-67/119)
+@E:\App\MagicInput\README.md
+
+Prompt:
+when a image is past to the attachement box then it will be automatically will be added to the text or code box in the cursor point (current/last),
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 20.png
+
+Prompt:
+Okay it's working [🖼 MagicInput Image 21.png]
+
+Attachments:
+@E:\App\MagicInput\.MagicInput\MagicInput Image 21.png
+
+Prompt:
+I hope it's working now [🖼 MagicInput Image 22.png]
+
+Prompt:
+First add the the setting button in the header where we can add the api keys. [🖼 MagicInput Image 23.png]
+ 
+
+I want the refining prompt will procced by
+
+1. AI will read the user prompt (input) 
+
+2. Read and alyze the attached/mentioned image/files/code
+
+3. ai will get the main keyword from the previous gotten data from (1 and 2) and base on them anlyze the codebase and the related codes/file (make it grabbed search context search in the codebase and anylyze the realated file using it's tool call features. 
+
+4. then make it fine prompt it will be properly organized and well planed. 
+
+2.
+
+Prompt:
+continue and add this model:
+
+# To run this code you need to install the following dependencies:
+# pip install google-genai
+
+import base64
+import os
+from google import genai
+from google.genai import types
+
+
+def generate():
+    client = genai.Client(
+        api_key=os.environ.get("GEMINI_API_KEY"),
+    )
+
+    model = "gemini-2.5-flash"
+    contents = [
+        types.Content(
+            role="user",
+            parts=[
+                types.Part.from_text(text="""INSERT_INPUT_HERE"""),
+            ],
+        ),
+    ]
+    generate_content_config = types.GenerateContentConfig(
+        thinking_config = types.ThinkingConfig(
+            thinking_budget=1000,
+        ),
+        response_mime_type="text/plain",
+    )
+
+    for chunk in client.models.generate_content_stream(
+        model=model,
+        contents=contents,
+        config=generate_content_config,
+    ):
+        print(chunk.text, end="")
+
+if __name__ == "__main__":
+    generate()
+
+Prompt:
+Genimi api key is installed but still not working. [🖼 MagicInput Image 24.png]
+
+Prompt:
+[🖼 MagicInput Image 25.png] এপিআই কি ইনস্টল করা আছে, কিন্তু এটি এখনও কাজ করছে না।
+
+Prompt:
+এপিআই কি ইনস্টল করা আছে, কিন্তু এটি এখনও কাজ করছে না।[🖼 MagicInput Image 26.png]
+
+Prompt:
+You can see it's asking the user flowup but it should not do this. Inprove the prompt of the api call and make sure it will just parse the result of the api call:
+
+
+
+""Please provide more context about `@MagicInput.py` to enable me to suggest relevant and impactful new features.
+
+To provide the most valuable suggestions, please tell me:
+
+1.  **What is `@MagicInput.py`?**
+    *   Is it a Python script, a full application, a library?
+    *   What is its primary purpose or main function? What problem does it solve?
+    *   Who is its target audience?
+    *   What are its current key features or capabilities?
+
+2.  **What are your goals for a new feature?**
+    *   (e.g., improve user experience, increase efficiency, expand functionality, attract new users, enhance automation, integrate with other tools, monetize the app?)
+
+Once I have this information, I can suggest a well-aligned and beneficial new feature.""
+
+Attachments:
+@E:\App\MagicInput\MagicInput.py
+
+Prompt:
+analyze the codebase
+
+Prompt:
+analyze the code base
+
+Prompt:
+analyze the app
+
+Prompt:
+suggest me what feature I can add to it.
+
+Prompt:
+analyze teh app
+
+Prompt:
+Inprove the ui of the app @MagicInput.py
+
+Attachments:
+@E:\App\MagicInput\MagicInput.py
+
+Prompt:
+Make the ui more morder and colorful and user freindl [🖼 MagicInput Image 27.png]
+
+also you can after the last edit the bottom buttons are cropped, can you make them back?[🖼 MagicInput Image 28.png]
+
