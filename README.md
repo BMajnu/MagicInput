@@ -56,10 +56,9 @@ When the current task finishes, launch MagicInput and wait for the user's next c
 
 ## 📸 Screenshots
 
-| | |
+| Dark Theme | Light Theme |
 |---|---|
-| ![Screenshot 1](.MagicInput/MagicInput Image 1.png) | ![Screenshot 2](.MagicInput/MagicInput Image 2.png) |
-| ![Screenshot 3](.MagicInput/MagicInput Image 3.png) | ![Screenshot 4](.MagicInput/MagicInput Image 4.png) |
+| ![Dark mode preview](.MagicInput/Darkmode.png) | ![Light mode preview](.MagicInput/Lightmode.png) |
 
 ---
 
