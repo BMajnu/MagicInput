@@ -1,37 +1,58 @@
-# MagicInput
+# 🚀 MagicInput
 
-Minimalistic, cross-platform popup GUI for quickly jotting down text/code **and** attaching screenshots or image files &mdash; perfect for bug reports, note-taking, QA, or sending prompts to AI tools.
+**MagicInput** is an upgraded, all-in-one input window for Cursor, Windsurf or any other _agent-mode_ coding assistant that supports tool calls.
 
-![MagicInput screenshot](.MagicInput/MagicInput Image 1.png)
+It lets you fire off a single request and then iterate — text _and_ screenshots — inside the **same** request, squeezing the maximum value out of your monthly tool-call quota.
 
-## ✨ Features
+> **Note**  MagicInput only shines when your assistant runs in **Agent Mode** (where each follow-up uses tool calls, _not_ new requests).
 
-* **One-shot input** window &mdash; automatically closes after you "Send"
-* Drag-and-drop images (optional `tkinterdnd2`)
-* Paste image from clipboard (⌘/Ctrl + V)
-* Light / Dark theme toggle
-* System-tray integration on Windows (via `pystray`)
-* Saves all attachments & prompt history to a hidden `.MagicInput/` folder next to the script
-* Auto-installs missing Python dependencies on first run
+---
 
-## 🚀 Quick Start
+## ✅ What It Does
 
-```bash
-# clone
-git clone https://github.com/cursor-windsarf/MagicInput.git
-cd MagicInput
+After the AI finishes a task MagicInput pops up and asks for your next instruction:
 
-# run with any modern Python (3.8+)
-python MagicInput.py
+```
+prompt:
 ```
 
-The first launch may take a moment while required packages (Pillow, pystray, etc.) are installed automatically.
+1. You type _"add comments"_, _"refactor this"_, paste an image, etc.
+2. The AI continues working inside the same session.
+3. The loop repeats until **you** stop or the session hits its tool-call limit.
 
-## 🖥️ Requirements
+---
 
-* Python **3.8+** with `pip`
-* On Windows, the optional tray icon uses **pywin32** (auto-installed)
-* For drag-and-drop support, install [`tkinterdnd2`](https://pypi.org/project/tkinterdnd2/) (optional)
+## 💡 Why This Matters
+
+Most AI coding tools give you a fixed number of **requests** (e.g. 500 / month) and each request may include up to **25 tool calls**. Saying just "hi" burns a full request and wastes the remaining 24 calls.
+
+With **MagicInput**:
+
+* You start one request.
+* You can issue many follow-ups (each consuming only tool calls).
+* You therefore get ≈10 × more work out of the exact same quota.
+
+---
+
+## ⚙️ Set-Up (Basic)
+
+1. Copy `MagicInput.py` to your project root.
+2. Add `rule.mdc` (or copy the snippet below) to your IDE's **Project Rules** and set it to **always**.
+3. Run your assistant in Agent Mode.  That's it — you now have an interactive loop!
+
+```mdc
+# rule.mdc (minimal)
+When the current task finishes, launch MagicInput and wait for the user's next command.
+```
+
+---
+
+## 🧪 Current Version
+
+* ✅ Supports: **plain text input**, **clipboard image paste**, **drag-and-drop images**
+* 🕑 Coming soon: file uploads via drag-and-drop
+
+---
 
 ## 📸 Screenshots
 
@@ -40,24 +61,51 @@ The first launch may take a moment while required packages (Pillow, pystray, etc
 | ![Screenshot 1](.MagicInput/MagicInput Image 1.png) | ![Screenshot 2](.MagicInput/MagicInput Image 2.png) |
 | ![Screenshot 3](.MagicInput/MagicInput Image 3.png) | ![Screenshot 4](.MagicInput/MagicInput Image 4.png) |
 
-## 🤖 Usage tips
+---
 
-1. Type or paste any text / code into the editor pane.
-2. Drag images onto the canvas **or** hit the camera button to choose files.
-3. Press **Send** (or <kbd>Ctrl</kbd> + <kbd>Enter</kbd>) to save the prompt + images.
-4. Find your content inside `.MagicInput/` for easy uploading or automation.
-
-## 🛠️ Contributing
-
-Issues and pull requests are welcome!  Feel free to open tickets for bugs, feature ideas or UI polish.
-
-Ensure `pre-commit` passes before submitting a PR:
+## 🛠️ Installation
 
 ```bash
-pip install pre-commit
-pre-commit run --all-files
+# clone
+git clone https://github.com/cursor-windsarf/MagicInput.git
+cd MagicInput
+
+# run with Python 3.8+
+python MagicInput.py
 ```
+
+> The first launch auto-installs missing dependencies (`pillow`, `pystray`, optional `tkinterdnd2`).
+
+---
+
+## 🤖 Example Workflow
+
+1. Start a new chat → _one_ request is opened.
+2. MagicInput appears.
+3. Type "generate README" + paste screenshot → AI works (tool calls 1-5).
+4. MagicInput re-appears.
+5. Type "add comments" → AI continues (tool calls 6-8).
+6. …repeat up to 25 tool calls then the session gracefully ends.
+
+You accomplished multiple edits inside **one** request 🔥
+
+---
+
+## 🧰 Advanced Tips
+
+* Toggle Dark/Light theme with the 🌗 button.
+* Use <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>V</kbd> to paste clipboard images.
+* Click the 📷 button or drag files onto the canvas to attach screenshots.
+* All prompts & attachments live in a hidden `.MagicInput/` folder alongside the script.
+
+---
+
+## 🙋‍♂️ Developer
+
+MagicInput is maintained by **Badiuzzaman Majnu** (<badiuzzaman.majnu@gmail.com>). Contributions, issues, and pull requests are welcome!
+
+---
 
 ## 📜 License
 
-This project is released under the **MIT License** &mdash; see [`LICENSE`](LICENSE) for details. 
+Released under the MIT License – see [`LICENSE`](LICENSE) for full text.
