@@ -13,6 +13,13 @@ alwaysApply: true
 
 1. **Check if `MagicInput.py` exists** in the root directory.
 
+   * If it doesn't exist, create it with the following content:
+
+     ```python
+     # MagicInput.py
+     user_input = input("prompt: ")
+     ```
+
 2. **Main Workflow**:
 
    * Perform your assigned tasks.
@@ -33,3 +40,9 @@ alwaysApply: true
 3. **Exit Condition**:
 
    * If the user enters `"stop"` when prompted, exit the loop and terminate the process.
+
+4. **File, Image Attachements and Codebase Mention**:
+
+   * User can attached screnshot/image/any attachement (directory link of the file) from the `".MagicInput"`folder in the root directory. For example: [🖼 .MagicInput\MagicInput Image 31.png]
+
+   * User can mention code (selected lines durations with total line of th file and the starting and ending of the code part and including the fie directory link), file (fie directory link) from codebase. For example: [@.cursor\rules\rule.mdc (12-18/49) «### ✅ … content: ```python»]

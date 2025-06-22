@@ -329,3 +329,29 @@ Make the ui more morder and colorful and user freindl [🖼 MagicInput Image 27.
 
 also you can after the last edit the bottom buttons are cropped, can you make them back?[🖼 MagicInput Image 28.png]
 
+Prompt:
+I want customization on the text or code box input:
+
+1. When user attached screnshot/image/any attachement it will show directory link of the file from the `".MagicInput"`folder in the root directory. But now it's just mentioning the image without any directory link like this [🖼 MagicInput Image 0.png] so add here the direcotry link also.
+
+2. When user mention code/file including the fie directory link also.
+
+3. [🖼 MagicInput Image 30.png] I want you the the name of the "text or code" box to "Prompt"
+
+Prompt:
+I want to modify the app @MagicInput.py I want each time it will add in the end of the prompt "read the attachement/Code/file/screenshot/image (fllowing the direcotry link) mention above." following the detail:
+
+1. but when user attached just image then is will say "read the screenshot/image (fllowing the direcotry link) mention above."
+
+2. when user mentioned/attched code file then is will say "read the Code/file (fllowing the direcotry link) mention above.
+
+3. When user attached any other attachement like pdf here "read the attachement (fllowing the direcotry link) mention above.
+
+4. When use will attched different types then mention all the types like: "read the screenshot/image and code/file (fllowing the direcotry link) mention above.
+
+Attachments:
+@E:\App\MagicInput\MagicInput.py
+
+Prompt:
+It it does't attached or mention any file/code/attchement it will not add the additional text below the prompt
+

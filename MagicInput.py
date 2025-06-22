@@ -171,6 +171,8 @@ class InputPopup:
         # Config file path for API keys
         self.config_path = os.path.join(self.attachments_dir, "config.json")
         self.api_key: str | None = None
+        # Whether to automatically refine the prompt before sending
+        self.auto_refine: bool = False
 
         # Load existing config (API keys)
         self._load_config()
@@ -348,7 +350,7 @@ class InputPopup:
                            command=self._add_file)
 
         # Text section label
-        self.text_label = tk.Label(self.root, text="Text or Code", 
+        self.text_label = tk.Label(self.root, text="Prompt", 
                                  font=self.button_font,
                                  bg=self.current_theme["bg_main"], 
                                  fg=self.current_theme["text"], 
@@ -587,6 +589,8 @@ class InputPopup:
             dest = os.path.join(self.attachments_dir, f"MagicInput File {next_num}{ext}")
             shutil.copy(src_path, dest)
             self.file_paths.append(dest)
+            # Insert a mention into the prompt so the user can reference it easily
+            self._insert_file_mention(dest)
             self._refresh_summary()
         except Exception as e:
             messagebox.showerror("Error", f"Failed to add file: {e}")
@@ -628,6 +632,53 @@ class InputPopup:
         """Gather user input and attachment paths as formatted text."""
         text = self.text_input.get("1.0", tk.END).strip()
 
+        # ----------------------------------------------------
+        # Append footer directive based on attachment types
+        # ----------------------------------------------------
+        footer_parts: list[str] = []
+
+        # Determine if any images are present
+        if self.image_paths:
+            footer_parts.append("screenshot/image")
+
+        # Classify files between code and other attachments
+        code_exts = {
+            ".py", ".js", ".ts", ".tsx", ".jsx", ".c", ".cpp", ".h", ".hpp", ".cs", ".java",
+            ".rb", ".go", ".rs", ".swift", ".kt", ".kts", ".php", ".pl", ".sh", ".bat", ".cmd",
+            ".sql", ".xml", ".json", ".yaml", ".yml", ".css", ".scss", ".html", ".htm", ".md",
+            ".txt",
+        }
+
+        code_found = False
+        other_found = False
+        for p in self.file_paths:
+            _, ext = os.path.splitext(p)
+            if ext.lower() in code_exts:
+                code_found = True
+            else:
+                other_found = True
+
+        if code_found:
+            footer_parts.append("Code/file")
+        if other_found and not code_found:
+            # Only non-code files present ➔ treat as generic attachment
+            footer_parts.append("attachement")
+        elif other_found and code_found:
+            # Both code and other attachment types present ➔ mention both
+            footer_parts.append("attachement")
+
+        # Build footer sentence
+        footer_line = ""
+        if footer_parts:
+            if len(footer_parts) == 1:
+                parts_str = footer_parts[0]
+            else:
+                parts_str = " and ".join(footer_parts)
+            footer_line = f"read the {parts_str} (fllowing the direcotry link) mention above."
+
+        if footer_line:
+            text = f"{text}\n{footer_line}" if text else footer_line
+
         lines: list[str] = []
         lines.append("Prompt:")
         lines.append(text)
@@ -648,6 +699,10 @@ class InputPopup:
         return "\n".join(lines)
 
     def _send(self) -> None:
+        # Auto-refine prompt before processing if enabled
+        if getattr(self, "auto_refine", False):
+            self._refine_prompt()
+
         # Attempt to auto-detect file matches for pasted snippet
         self._detect_snippet_files()
         self._extract_mentioned_files()
@@ -1141,7 +1196,9 @@ class InputPopup:
         first_two = " ".join(words[:2])
         last_two = " ".join(words[-2:]) if len(words) > 2 else ""
         preview = f"{first_two} … {last_two}" if last_two else first_two
-        mention_line = f"[@{os.path.basename(file_path)} ({s_line}-{e_line}/{total}) «{preview}»]"
+        # Include the relative path so the directory link is visible to the user
+        rel_path = os.path.relpath(file_path, self.app_dir)
+        mention_line = f"[@{rel_path} ({s_line}-{e_line}/{total}) «{preview}»]"
 
         # Use Tk search to locate snippet text
         pos = self.text_input.search(snippet, "1.0", tk.END)
@@ -1156,8 +1213,15 @@ class InputPopup:
 
     def _insert_image_mention(self, img_path: str) -> None:
         """Insert an image mention tag at the current cursor location."""
-        mention = f"[🖼 {os.path.basename(img_path)}]"
+        # Show the relative path (inside .MagicInput) so users can click/see the directory link
+        rel_path = os.path.relpath(img_path, self.app_dir)
+        mention = f"[🖼 {rel_path}]"
         self.text_input.insert(tk.INSERT, mention + "\n")
+
+    def _insert_file_mention(self, file_path: str) -> None:
+        """Insert a file mention tag (with path) at the current cursor location."""
+        rel_path = os.path.relpath(file_path, self.app_dir)
+        self.text_input.insert(tk.INSERT, f"[@{rel_path}]\n")
 
     def _refine_prompt(self) -> None:
         """Use Gemini AI to rewrite/refine the current prompt text."""
@@ -1227,11 +1291,12 @@ class InputPopup:
                 with open(self.config_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     self.api_key = data.get("gemini_api_key")
+                    self.auto_refine = data.get("auto_refine", False)
         except Exception:
             pass
 
     def _save_config(self):
-        data = {"gemini_api_key": self.api_key}
+        data = {"gemini_api_key": self.api_key, "auto_refine": self.auto_refine}
         try:
             with open(self.config_path, "w", encoding="utf-8") as f:
                 json.dump(data, f)
@@ -1249,8 +1314,23 @@ class InputPopup:
         entry = tk.Entry(dialog, textvariable=key_var, width=50, show="*", bg=self.current_theme["bg_input"], fg=self.current_theme["text"])
         entry.pack(padx=10, pady=5)
 
+        # Auto refine checkbox
+        auto_var = tk.BooleanVar(value=self.auto_refine)
+        chk = tk.Checkbutton(
+            dialog,
+            text="Auto refine prompt before send",
+            variable=auto_var,
+            bg=self.current_theme["bg_main"],
+            fg=self.current_theme["text"],
+            selectcolor=self.current_theme["bg_main"],
+            activebackground=self.current_theme["bg_main"],
+            activeforeground=self.current_theme["text"]
+        )
+        chk.pack(padx=10, pady=(0, 10), anchor="w")
+
         def _save():
             self.api_key = key_var.get().strip()
+            self.auto_refine = auto_var.get()
             self._save_config()
             if gemini_module and self.api_key:
                 try:
