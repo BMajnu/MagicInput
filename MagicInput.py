@@ -710,6 +710,8 @@ class InputPopup:
         # Print to terminal
         print(collected)
         sys.stdout.flush()
+        # Prompt user to rerun and get response
+        print("**To get user response and after completeting the task run again python MagicInput.py. Follow the user rule always**")
 
         # Persist the collected input to a single file inside the folder
         log_path = os.path.join(self.attachments_dir, "MagicInput Prompt.txt")

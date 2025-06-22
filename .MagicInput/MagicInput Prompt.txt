@@ -355,3 +355,6 @@ Attachments:
 Prompt:
 It it does't attached or mention any file/code/attchement it will not add the additional text below the prompt
 
+Prompt:
+Please evaluate the operational status and performance of [TODO: Specify the system, feature, or code block].
+
