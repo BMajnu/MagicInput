@@ -3,46 +3,85 @@ description:
 globs: 
 alwaysApply: true
 ---
+
+### ✅ Task: MagicInput Interactive Task Manager
+
+MagicInput is a lightweight assistant that guides you (and the agent) through creating and executing development tasks.  It must be launched from the terminal **inside this chat** and should keep running until the user types `stop`.
+
 ---
-description: 
-globs: 
-alwaysApply: true
+
+#### 1️⃣ Bootstrap – Ensure `MagicInput.py` Exists
+
+If `MagicInput.py` is **missing**, create it with the minimal placeholder below (logic will be filled in later):
+
+```python
+# MagicInput.py
+if __name__ == "__main__":
+    print("MagicInput placeholder – interactive logic pending…")
+```
+
 ---
 
-### ✅ Task: Interactive Task Loop with User Feedback
+#### 2️⃣ Runtime Workflow
 
-1. **Check if `MagicInput.py` exists** in the root directory.
+1. Start the app with:
+   ```bash
+   python MagicInput.py
+   ```
+   (The shell must appear in this chat window.)
+2. The program shows **two options** and waits for input (1 for New Task 2 for Follow Up):
+   • `1` – New Task  
+   • `2` – Follow Up
+3. Read the user's selection and get the prompt next steps.
+4. The terminal should be closed after getting the prompt and opened in the chat window itself.
+5. Read the user's input.
+6. Based on the input, perform the next set of tasks.
+7. Repeat the process.
 
-   * If it doesn't exist, create it with the following content:
+8. If the user enters `"stop"` when prompted, exit the loop and terminate the process.
+---
 
-     ```python
-     # MagicInput.py
-     user_input = input("prompt: ")
-     ```
+#### 3️⃣ New Task Flow
 
-2. **Main Workflow**:
+   • **SIMPLE Task**
+     - Analyze relevant code/files/algorithms.
+     - Produce a clear, step-by-step implementation plan.
+     - Immediately begin implementation.
 
-   * Perform your assigned tasks.
+   • **COMPLEX Task**
+     - Analyze relevant code/files/algorithms.
+     - Devise a comprehensive, multi-phase plan.
+     - Look for `MTask.md`; create it if missing.
+     - Record all phases and steps in `MTask.md` (format below).
+     - Wait for user approval, then begin with **Phase 1**.
 
-   * Run:
+---
 
-     ```bash
-     python MagicInput.py
-     ```
-   * The terminal should be opened in the chat window itself.
+#### 4️⃣ Follow Up Flow
 
-   * Read the user's input.
+• **SIMPLE tasks**: Execute the previously generated plan, marking each step as completed before moving on.
+• **COMPLEX tasks**: Work through the phases in order, checking off (`[x]`) each step before continuing.
 
-   * Based on the input, perform the next set of tasks.
+---
 
-   * Repeat the process.
+#### 5️⃣ `MTask.md` Format
 
-3. **Exit Condition**:
+```
+App/Project name – brief description
 
-   * If the user enters `"stop"` when prompted, exit the loop and terminate the process.
+Task Overview:
 
-4. **File, Image Attachements and Codebase Mention**:
+## Phase 1 – YYYY-MM-DD
+- [ ] Step 1
+- [ ] Step 2
 
-   * User can attached screnshot/image/any attachement (directory link of the file) from the `"MagicInput"`folder in the root directory. For example: [🖼 MagicInput\MagicInput Image 31.png]
+## Phase 2 – YYYY-MM-DD
+- [ ] …
 
-   * User can mention code (selected lines durations with total line of th file and the starting and ending of the code part and including the fie directory link), file (fie directory link) from codebase. For example: [@.cursor\rules\rule.mdc (12-18/49) «### ✅ … content: ```python»]
+## Phase 3 – YYYY-MM-DD
+- [ ] …
+```
+
+Execution Guideline: **Do not modify code until the user approves the generated plan.**  Complete phases sequentially, updating the checklist as you go.
+
+---
