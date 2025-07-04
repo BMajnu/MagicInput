@@ -1,0 +1,4 @@
+Pillow
+tkinterdnd2
+google-genai>=0.7.0
+pystray

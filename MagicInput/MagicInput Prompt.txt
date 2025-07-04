@@ -358,3 +358,67 @@ It it does't attached or mention any file/code/attchement it will not add the ad
 Prompt:
 Please evaluate the operational status and performance of [TODO: Specify the system, feature, or code block].
 
+Prompt:
+It say's fild to describe the images module no atribute "cline" 
+
+oh somethign like this
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 6.png]
+still same faild to describe image: module 'google.genarativeai' has no attribute'clinent'
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 7.png]
+still same faild to describe image: module 'google.genarativeai' has no attribute'clinent'
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 11.png]
+Can you fix it
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 12.png]
+fix it
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 13.png]
+Fix it
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 14.png]
+fix it
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 15.png]
+Fix it.
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 16.png]
+fix the error
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+[🖼 MagicInput\MagicInput Image 17.png]
+fix it
+read the screenshot/image (fllowing the direcotry link) mention above.
+
+Prompt:
+Can you make sure the feature of the describe image as:
+
+When a user adds a screenshot or image to the app and subsequently clicks on an "Image Description" button:
+*   The AI should analyze all attached images.
+*   The AI should describe the images from the perspective of a user-provided text prompt.
+*   And instantly add it to the prompt box. (remove enable/desable feature if have)
+
+Describtion should be:
+For example, if the user's prompt is: "I think the UI is not good", the AI should analyze the image (of UI) and generate a description highlighting aspects that are "not good", specifically detailing UI elements such as buttons, colors, and everything about the UI, because the prompt is related to UI.
+
+It will not be very long but if requre as per prompt and image then it can be long, but make sure there are not be any not required things or text.
+

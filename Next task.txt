@@ -1,0 +1,10 @@
+Implement a new feature where the AI provides a contextual description of an image.
+
+When a user adds a screenshot or image to the app and subsequently clicks on an "Image Description" button:
+*   The AI should analyze all attached images.
+*   The AI should describe the images from the perspective of a user-provided text prompt.
+
+For example, if the user's prompt is: "I think the UI is not good", the AI should analyze the image (or UI) and generate a description highlighting aspects that are "not good", specifically detailing UI elements such as buttons, colors, and everything about the UI, because the prompt is related to UI. And when the button is not enabled, then it will just normally attach the link of the image.
+
+
+Also now it make the folder for this app datas as ".MagicInput" but I want it will be "MagicInput"
