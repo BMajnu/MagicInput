@@ -1,6 +1,8 @@
 ## Terminal Call rule:
 
-After running terminall command, read back the terminal call result. If can't read it please run MagicInput.py app to get the result manually by user.
+1. Always run the Blocking command (for any terminal tool call) 
+2. Don't run any non-blocking commands.
+
 
 ## Terminal Jam issue/Cancel issue
 

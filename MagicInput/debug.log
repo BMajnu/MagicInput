@@ -162,3 +162,12 @@ TypeError: Part.from_text() takes 1 positional argument but 2 were given
 [2025-08-16 22:03:35] Context block total size=11982 chars; user_prompt size=163 chars
 [2025-08-16 22:03:35] Calling Gemini with 0 image part(s). Model=gemini-2.5-flash
 [2025-08-16 22:03:43] Gemini response received successfully
+[2025-08-16 22:25:38] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:28:33] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:29:18] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:33:10] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:34:57] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:40:14] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:44:30] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:44:56] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:50:58] MagicInput initialized; logging to debug.log and magicinput.log

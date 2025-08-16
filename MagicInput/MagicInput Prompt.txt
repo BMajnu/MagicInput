@@ -1,1 +1,2 @@
-sill waiting form user's prompt so run he command "timeout 30".
+Prompt:
+analzye the codebase and give me a summary

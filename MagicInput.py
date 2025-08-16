@@ -140,7 +140,7 @@ class InputPopup:
         self.prompt_log_path = os.path.join(self.attachments_dir, "MagicInput Prompt.txt")
         self.archive_path = os.path.join(self.attachments_dir, "Prompts Archive.txt")
         # Waiting placeholder text (keep wording as requested)
-        self.waiting_placeholder = "sill waiting form user's prompt so run he command \"timeout 30\"."
+        self.waiting_placeholder = "sill waiting form user's prompt so run the command \"timeout 30\"."
         # Config file path for API keys
         self.config_path = os.path.join(self.app_dir, "MagicInput", "config.json")
         self.api_key: str | None = None

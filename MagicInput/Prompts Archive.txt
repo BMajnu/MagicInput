@@ -1,6 +1,4 @@
-[2025-08-16 12:54:58] (from previous session)
-This is a test prompt from a previous session.
---------------------------------------------------
+-------------------------------------------------
 [2025-08-16 13:03:15] (from previous session)
 Prompt:
 sfdsd
@@ -854,4 +852,7 @@ Traceback (most recent call last):
     self.describe_img_btn.config(state=tk.DISABLED)
     ^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'InputPopup' object has no attribute 'describe_img_btn'
+--------------------------------------------------
+[2025-08-16 22:25:38] (from previous session)
+sill waiting form user's prompt so run he command "timeout 30".
 --------------------------------------------------
