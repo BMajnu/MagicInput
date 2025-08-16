@@ -1,87 +1,41 @@
----
-description: 
-globs: 
-alwaysApply: true
----
+## Terminal Jam issue/Cancel issue
 
-### ✅ Task: MagicInput Interactive Task Manager
+1. If the terminal call is cancelled/or end without any result then will will run the terminal proccess killing command to kill it untill geting a command result, 
+2. And after geting a command result, you will run the command again.
 
-MagicInput is a lightweight assistant that guides you (and the agent) through creating and executing development tasks.  It must be launched from the terminal **inside this chat** and should keep running until the user types `stop`.
 
----
+## Interactive Task Loop with User Feedback
 
-#### 1️⃣ Bootstrap – Ensure `MagicInput.py` Exists
+1. **Check if `MagicInput.py` exists** in the root directory (don't rewrite or change on it, just run as it is to get user input/prompt.).
 
-If `MagicInput.py` is **missing**, create it with the minimal placeholder below (logic will be filled in later):
+   * If it doesn't exist, create it with the following content:
 
-```python
-# MagicInput.py
-if __name__ == "__main__":
-    print("MagicInput placeholder – interactive logic pending…")
-```
+     ```python
+     # MagicInput.py
+     prompt = input("prompt: ")
+     ```
 
----
+2. **Main Workflow**:
 
-#### 2️⃣ Runtime Workflow
+   * Perform your assigned tasks.
 
-1. Start the app with:
-   ```bash
-   python MagicInput.py
-   ```
-   (The shell must appear in this chat window.)
-2. The program shows **two options** and waits for input (1 for New Task 2 for Follow Up):
-   • `1` – New Task  
-   • `2` – Follow Up
-3. Read the user's selection and get the prompt next steps.
-4. The terminal should be closed after getting the prompt and opened in the chat window itself.
-5. Read the user's input.
-6. Based on the input, perform the next set of tasks.
-7. Repeat the process.
+   * Run:
 
-8. If the user enters `"stop"` when prompted, exit the loop and terminate the process.
----
+     ```bash
+     python MagicInput.py
+     ```
+   * The terminal should be opened in the chat window itself.
 
-#### 3️⃣ New Task Flow
+   * after running the command, go to sleep for 100 seconds or run a conditional terminal command until it terminate, you will keep in sleep (sleep terminal call), and and read the previous command result. 
 
-   • **SIMPLE Task**
-     - Analyze relevant code/files/algorithms.
-     - Produce a clear, step-by-step implementation plan.
-     - Immediately begin implementation.
+   * After terminate the command, read the user's (MagicInput) input/prompt. 
+   
+   * If you can't read or got error to read the terminal user input/prompt then check the last prompt in MagicInput\MagicInput Prompt.txt
 
-   • **COMPLEX Task**
-     - Analyze relevant code/files/algorithms.
-     - Devise a comprehensive, multi-phase plan.
-     - Look for `MTask.md`; create it if missing.
-     - Record all phases and steps in `MTask.md` (format below).
-     - Wait for user approval, then begin with **Phase 1**.
+   * Based on the input/prompt, perform the next set of tasks.
 
----
+   * Repeat the process.
 
-#### 4️⃣ Follow Up Flow
+3. **Exit Condition**:
 
-• **SIMPLE tasks**: Execute the previously generated plan, marking each step as completed before moving on.
-• **COMPLEX tasks**: Work through the phases in order, checking off (`[x]`) each step before continuing.
-
----
-
-#### 5️⃣ `MTask.md` Format
-
-```
-App/Project name – brief description
-
-Task Overview:
-
-## Phase 1 – YYYY-MM-DD
-- [ ] Step 1
-- [ ] Step 2
-
-## Phase 2 – YYYY-MM-DD
-- [ ] …
-
-## Phase 3 – YYYY-MM-DD
-- [ ] …
-```
-
-Execution Guideline: **Do not modify code until the user approves the generated plan.**  Complete phases sequentially, updating the checklist as you go.
-
----
+   * If the user enters `"stop"` when prompted, exit the loop and terminate the process.

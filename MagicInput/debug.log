@@ -1,0 +1,164 @@
+[2025-08-16 14:21:58] Starting image processing for 1 image(s). include_context=True
+[2025-08-16 14:21:58] Attachments dir: e:\Developing Projects\MagicInput\MagicInput (writable=True)
+[2025-08-16 14:21:58] Failed processing 'MagicInput Image 2.png': Part.from_bytes() takes 1 positional argument but 2 positional arguments (and 1 keyword-only argument) were given
+Traceback (most recent call last):
+  File "e:\Developing Projects\MagicInput\MagicInput.py", line 1591, in _describe_image_thread
+    image_parts.append(types.Part.from_bytes(byte_arr.getvalue(), mime_type='image/png'))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Part.from_bytes() takes 1 positional argument but 2 positional arguments (and 1 keyword-only argument) were given
+
+[2025-08-16 14:28:51] Starting image processing for 1 image(s). include_context=True
+[2025-08-16 14:28:51] Attachments dir: E:\Developing Projects\MagicInput\MagicInput (writable=True)
+[2025-08-16 14:28:51] Describe image thread encountered an error.
+Traceback (most recent call last):
+  File "E:\Developing Projects\MagicInput\magicInput.py", line 1686, in _describe_image_thread
+    parts = image_parts + [types.Part.from_text(analysis_prompt)]
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Part.from_text() takes 1 positional argument but 2 were given
+
+[2025-08-16 14:41:05] Starting image processing for 2 image(s). include_context=True
+[2025-08-16 14:41:05] Attachments dir: E:\Developing Projects\MagicInput\MagicInput (writable=True)
+[2025-08-16 14:41:05] Calling Gemini with 2 image part(s). Model=gemini-1.5-flash
+[2025-08-16 14:41:18] Gemini response received successfully
+[2025-08-16 14:41:48] Starting image processing for 2 image(s). include_context=True
+[2025-08-16 14:41:48] Attachments dir: E:\Developing Projects\MagicInput\MagicInput (writable=True)
+[2025-08-16 14:41:48] Calling Gemini with 2 image part(s). Model=gemini-1.5-flash
+[2025-08-16 14:41:58] Gemini response received successfully
+[2025-08-16 15:02:27] Starting image processing for 2 image(s). include_context=True
+[2025-08-16 15:02:27] Attachments dir: E:\Developing Projects\MagicInput\MagicInput (writable=True)
+[2025-08-16 15:02:27] Calling Gemini with 2 image part(s). Model=gemini-1.5-flash
+[2025-08-16 15:02:40] Gemini response received successfully
+[2025-08-16 15:51:09] Starting image processing for 1 image(s). include_context=True
+[2025-08-16 15:51:09] Attachments dir: E:\Developing Projects\MagicInput\MagicInput (writable=True)
+[2025-08-16 15:51:09] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 15:51:21] Gemini response received successfully
+[2025-08-16 17:45:54] Starting image processing for 1 image(s). include_context=True
+[2025-08-16 17:45:54] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 17:46:03] Gemini response received successfully
+[2025-08-16 18:08:03] Starting image processing for 1 image(s). include_context=True
+[2025-08-16 18:08:03] Prepared 1 image part(s). total_bytes=18904 sizes=[18904]
+[2025-08-16 18:08:03] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 18:08:03] Context block total size=11982 chars; user_prompt size=34 chars
+[2025-08-16 18:08:03] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 18:08:15] Gemini response received successfully
+[2025-08-16 18:17:09] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 18:17:44] Starting image processing for 1 image(s). include_context=True; mode=connections
+[2025-08-16 18:17:44] Prepared 1 image part(s). total_bytes=18985 sizes=[18985]
+[2025-08-16 18:17:44] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 18:17:44] Context block total size=11982 chars; user_prompt size=21 chars
+[2025-08-16 18:17:44] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 18:17:53] Gemini response received successfully
+[2025-08-16 18:18:52] Starting image processing for 1 image(s). include_context=True; mode=describe
+[2025-08-16 18:18:52] Prepared 1 image part(s). total_bytes=18985 sizes=[18985]
+[2025-08-16 18:18:52] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=no(0 chars); terminal=no(0 chars)
+[2025-08-16 18:18:52] Context block total size=1950 chars; user_prompt size=21 chars
+[2025-08-16 18:18:52] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 18:19:06] Gemini response received successfully
+[2025-08-16 18:21:39] Starting image processing for 1 image(s). include_context=True; mode=describe
+[2025-08-16 18:21:39] Prepared 1 image part(s). total_bytes=19176 sizes=[19176]
+[2025-08-16 18:21:39] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=no(0 chars); terminal=no(0 chars)
+[2025-08-16 18:21:39] Context block total size=1950 chars; user_prompt size=30 chars
+[2025-08-16 18:21:39] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 18:21:50] Gemini response received successfully
+[2025-08-16 18:28:38] Starting image processing for 2 image(s). include_context=True; mode=describe
+[2025-08-16 18:28:38] Prepared 2 image part(s). total_bytes=25151 sizes=[19213, 5938]
+[2025-08-16 18:28:38] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 18:28:38] Context block total size=11982 chars; user_prompt size=525 chars
+[2025-08-16 18:28:38] Calling Gemini with 2 image part(s). Model=gemini-1.5-flash
+[2025-08-16 18:28:48] Gemini response received successfully
+[2025-08-16 18:34:30] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 19:02:57] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 19:07:31] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 19:13:47] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 19:15:43] Starting image processing for 1 image(s). include_context=True; mode=connections
+[2025-08-16 19:15:43] Prepared 1 image part(s). total_bytes=21517 sizes=[21517]
+[2025-08-16 19:15:43] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 19:15:43] Context block total size=11982 chars; user_prompt size=20 chars
+[2025-08-16 19:15:43] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 19:15:51] Gemini response received successfully
+[2025-08-16 19:20:32] Starting image processing for 1 image(s). include_context=True; mode=describe
+[2025-08-16 19:20:32] Prepared 1 image part(s). total_bytes=26542 sizes=[26542]
+[2025-08-16 19:20:32] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 19:20:32] Context block total size=11982 chars; user_prompt size=406 chars
+[2025-08-16 19:20:32] Calling Gemini with 1 image part(s). Model=gemini-1.5-flash
+[2025-08-16 19:20:43] Gemini response received successfully
+[2025-08-16 19:35:47] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 19:45:22] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 20:10:30] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 20:14:51] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 20:23:14] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 20:26:26] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 20:35:17] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:02:26] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:04:22] Starting image processing for 1 image(s). include_context=True; mode=combine
+[2025-08-16 21:04:22] Prepared 1 image part(s). total_bytes=19779 sizes=[19779]
+[2025-08-16 21:04:22] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 21:04:22] Context block total size=11982 chars; user_prompt size=113 chars
+[2025-08-16 21:04:22] Calling Gemini with 1 image part(s). Model=gemini-2.5-flash
+[2025-08-16 21:04:40] Gemini response received successfully
+[2025-08-16 21:06:59] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:09:16] Starting image processing for 1 image(s). include_context=True; mode=combine
+[2025-08-16 21:09:16] Prepared 1 image part(s). total_bytes=21690 sizes=[21690]
+[2025-08-16 21:09:16] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 21:09:16] Context block total size=11982 chars; user_prompt size=121 chars
+[2025-08-16 21:09:16] Calling Gemini with 1 image part(s). Model=gemini-2.5-flash
+[2025-08-16 21:09:34] Gemini response received successfully
+[2025-08-16 21:12:33] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:14:34] Starting image processing for 2 image(s). include_context=True; mode=combine
+[2025-08-16 21:14:34] Prepared 2 image part(s). total_bytes=40100 sizes=[20242, 19858]
+[2025-08-16 21:14:34] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 21:14:34] Context block total size=11982 chars; user_prompt size=90 chars
+[2025-08-16 21:14:34] Calling Gemini with 2 image part(s). Model=gemini-2.5-flash
+[2025-08-16 21:14:51] Gemini response received successfully
+[2025-08-16 21:15:52] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:16:44] Starting image processing for 2 image(s). include_context=True; mode=combine
+[2025-08-16 21:16:44] Prepared 2 image part(s). total_bytes=41163 sizes=[20104, 21059]
+[2025-08-16 21:16:44] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 21:16:44] Context block total size=11982 chars; user_prompt size=33 chars
+[2025-08-16 21:16:44] Calling Gemini with 2 image part(s). Model=gemini-2.5-flash
+[2025-08-16 21:17:14] Gemini response received successfully
+[2025-08-16 21:19:43] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:24:22] Starting image processing for 1 image(s). include_context=True; mode=combine
+[2025-08-16 21:24:22] Prepared 1 image part(s). total_bytes=19311 sizes=[19311]
+[2025-08-16 21:24:22] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 21:24:22] Context block total size=11982 chars; user_prompt size=253 chars
+[2025-08-16 21:24:22] Calling Gemini with 1 image part(s). Model=gemini-2.5-flash
+[2025-08-16 21:24:32] Gemini response received successfully
+[2025-08-16 21:35:48] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:39:24] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:40:14] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:46:27] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:49:58] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 21:50:05] Starting image processing for 0 image(s). include_context=True; mode=combine
+[2025-08-16 21:50:05] Prepared 0 image part(s). total_bytes=0 sizes=[]
+[2025-08-16 21:50:05] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 21:50:05] Context block total size=11982 chars; user_prompt size=6 chars
+[2025-08-16 21:50:05] Calling Gemini with 0 image part(s). Model=gemini-2.5-flash
+[2025-08-16 21:50:16] Gemini response received successfully
+[2025-08-16 21:51:26] Starting image processing for 0 image(s). include_context=True; mode=plan
+[2025-08-16 21:51:26] Prepared 0 image part(s). total_bytes=0 sizes=[]
+[2025-08-16 21:51:26] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 21:51:26] Context block total size=11982 chars; user_prompt size=3595 chars
+[2025-08-16 21:51:26] Calling Gemini with 0 image part(s). Model=gemini-2.5-flash
+[2025-08-16 21:51:36] Gemini response received successfully
+[2025-08-16 22:00:28] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:00:37] Starting image processing for 0 image(s). include_context=True; mode=plan
+[2025-08-16 22:00:37] Prepared 0 image part(s). total_bytes=0 sizes=[]
+[2025-08-16 22:00:37] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 22:00:37] Context block total size=11982 chars; user_prompt size=182 chars
+[2025-08-16 22:00:37] Calling Gemini with 0 image part(s). Model=gemini-2.5-flash
+[2025-08-16 22:00:44] Gemini response received successfully
+[2025-08-16 22:01:23] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:01:31] Starting image processing for 0 image(s). include_context=True; mode=plan
+[2025-08-16 22:01:31] Prepared 0 image part(s). total_bytes=0 sizes=[]
+[2025-08-16 22:01:31] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 22:01:31] Context block total size=11982 chars; user_prompt size=182 chars
+[2025-08-16 22:01:31] Calling Gemini with 0 image part(s). Model=gemini-2.5-flash
+[2025-08-16 22:01:36] Gemini response received successfully
+[2025-08-16 22:03:15] MagicInput initialized; logging to debug.log and magicinput.log
+[2025-08-16 22:03:35] Starting image processing for 0 image(s). include_context=True; mode=plan
+[2025-08-16 22:03:35] Prepared 0 image part(s). total_bytes=0 sizes=[]
+[2025-08-16 22:03:35] Context flags: include_context=True; project_brief=yes(1925 chars); prompts_archive=yes(10000 chars); terminal=no(0 chars)
+[2025-08-16 22:03:35] Context block total size=11982 chars; user_prompt size=163 chars
+[2025-08-16 22:03:35] Calling Gemini with 0 image part(s). Model=gemini-2.5-flash
+[2025-08-16 22:03:43] Gemini response received successfully
