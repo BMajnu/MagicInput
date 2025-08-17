@@ -76,7 +76,7 @@ Use the buttons: `Visionize` (generate into prompt) or `Visionize & Send` (gener
   - Prompts archive
   - Terminal
 - The latest prompt is written to `MagicInput/MagicInput Prompt.txt`.
-- Older prompts are appended to `MagicInput/Prompts Archive.txt` with timestamps and separators.
+- Older prompts are prepended to `MagicInput/Prompts Archive.txt` (newest-first) with timestamps and separators.
 - A status line shows “Waiting for prompt: Xs” with a count-up timer.
 
 ## Keyboard Shortcuts

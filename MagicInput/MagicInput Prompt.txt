@@ -1,2 +1,2 @@
 Prompt:
-analzye the codebase and give me a summary
+this new prompt

@@ -200,8 +200,17 @@ class InputPopup:
                 if prev and prev != self.waiting_placeholder:
                     sep = "\n" + ("-" * 50) + "\n"
                     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    with open(self.archive_path, "a", encoding="utf-8") as arch:
-                        arch.write(f"[{timestamp}] (from previous session)\n{prev}{sep}")
+                    new_entry = f"[{timestamp}] (from previous session)\n{prev}{sep}"
+                    # Read existing archive content and prepend new entry at the top
+                    existing_content = ""
+                    try:
+                        if os.path.isfile(self.archive_path):
+                            with open(self.archive_path, "r", encoding="utf-8", errors="ignore") as f2:
+                                existing_content = f2.read()
+                    except Exception:
+                        existing_content = ""
+                    with open(self.archive_path, "w", encoding="utf-8") as arch:
+                        arch.write(new_entry + existing_content)
         except Exception:
             pass # Ignore errors during this pre-flight check
 
@@ -2381,9 +2390,9 @@ Constraints:
             if os.path.isfile(self.archive_path):
                 with open(self.archive_path, "r", encoding="utf-8", errors="ignore") as f:
                     content = f.read()
-                # Keep the last segment if too large
+                # Keep the first segment (newest-first file) if too large
                 if len(content) > max_chars:
-                    return content[-max_chars:]
+                    return content[:max_chars]
         except Exception:
             pass
         return ""
