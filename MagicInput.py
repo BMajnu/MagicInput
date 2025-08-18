@@ -16,6 +16,8 @@ from typing import Optional, Any, Sequence, cast
 import time
 import re
 import json
+import signal
+import queue
 from tkinterdnd2 import TkinterDnD, DND_FILES
 from google import genai
 from google.genai import types
@@ -120,6 +122,20 @@ class InputPopup:
 
         # Re-apply frameless after restore from minimize
         self.root.bind("<Map>", self._restore_override)
+
+        # Threading and shutdown state
+        self._tk_thread = threading.current_thread()
+        self._shutdown_event = threading.Event()
+        try:
+            # Use non-parameterized annotation to avoid runtime evaluation issues
+            self._tk_queue: queue.Queue = queue.Queue()
+        except Exception:
+            self._tk_queue = None  # type: ignore[assignment]
+        self._queue_poller_after_id: Any | None = None
+        try:
+            self.root.after(50, self._process_tk_queue)
+        except Exception:
+            pass
 
         # Runtime data
         self.image_paths: list[str] = []
@@ -298,20 +314,26 @@ class InputPopup:
                                  command=self._open_settings)
 
         # Minimize button (–)
-        self.minimize_btn = tk.Button(self.title_bar, text="–", 
-                                     font=('Segoe UI', 10, 'bold'),
-                                     bg=self.current_theme["bg_secondary"], 
-                                     fg=self.current_theme["text_primary"], 
-                                     relief="flat",
-                                     command=self._minimize)
+        self.minimize_btn = tk.Button(
+            self.title_bar,
+            text="–",
+            font=('Segoe UI', 10, 'bold'),
+            bg=self.current_theme["bg_secondary"],
+            fg=self.current_theme["text_primary"],
+            relief="flat",
+            command=self._minimize,
+        )
 
         # Close button (×)
-        self.close_btn = tk.Button(self.title_bar, text="×", 
-                                  font=('Segoe UI', 10, 'bold'),
-                                  bg=self.current_theme["bg_secondary"], 
-                                  fg=self.current_theme["text_primary"], 
-                                  relief="flat",
-                                  command=self.root.destroy)
+        self.close_btn = tk.Button(
+            self.title_bar,
+            text="×",
+            font=('Segoe UI', 10, 'bold'),
+            bg=self.current_theme["bg_secondary"],
+            fg=self.current_theme["text_primary"],
+            relief="flat",
+            command=lambda: self.shutdown(source='close_button'),
+        )
 
         # Attachment summary (always visible)
         self.attach_summary_var = tk.StringVar(value="")
@@ -322,7 +344,7 @@ class InputPopup:
             bg=self.current_theme["bg_tertiary"],
             fg=self.current_theme["text_primary"],
             anchor="w",
-            justify="left"
+            justify="left",
         )
 
         # Status line (for countdown / messages)
@@ -1062,7 +1084,8 @@ class InputPopup:
 
     def _send_and_close(self) -> None:
         self._send()
-        self.root.after(100, self.root.destroy)
+        # Use centralized shutdown to avoid race with mainloop state
+        self.shutdown(source='send_and_close')
 
     def _visionize_and_send(self) -> None:
         """Visionize the image, then immediately send and close"""
@@ -1131,6 +1154,131 @@ class InputPopup:
                 self.tray_icon.stop()
             except Exception:
                 pass
+
+    # ----------------------------- Centralized shutdown and Tk dispatcher ----------------------------- #
+    def call_tk(self, func, delay: int = 0) -> None:
+        """Run a callable on the Tk thread without directly touching Tk from other threads.
+
+        If called on the Tk thread, executes immediately (or via after if delay>0).
+        If called on a non-Tk thread, enqueues for processing by _process_tk_queue.
+        """
+        try:
+            if threading.current_thread() is self._tk_thread:
+                if delay and delay > 0:
+                    try:
+                        self.root.after(delay, func)
+                    except Exception:
+                        try:
+                            func()
+                        except Exception:
+                            pass
+                else:
+                    try:
+                        func()
+                    except Exception:
+                        pass
+            else:
+                if getattr(self, "_tk_queue", None) is not None:
+                    try:
+                        self._tk_queue.put((func, delay))  # type: ignore[arg-type]
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+    def _process_tk_queue(self) -> None:
+        if getattr(self, "_shutdown_event", None) and self._shutdown_event.is_set():
+            return
+        try:
+            while True:
+                func, delay = self._tk_queue.get_nowait()  # type: ignore[assignment]
+                if delay and delay > 0:
+                    try:
+                        self.root.after(delay, func)
+                    except Exception:
+                        try:
+                            func()
+                        except Exception:
+                            pass
+                else:
+                    try:
+                        func()
+                    except Exception:
+                        pass
+        except Exception:
+            # Likely queue.Empty; ignore
+            pass
+        try:
+            if not self._shutdown_event.is_set():
+                self._queue_poller_after_id = self.root.after(50, self._process_tk_queue)
+        except Exception:
+            pass
+
+    def shutdown(self, source: str = "unknown") -> None:
+        """Thread-safe, idempotent shutdown entry-point for all exit paths."""
+        try:
+            if hasattr(self, "_shutdown_event") and self._shutdown_event.is_set():
+                return
+            self._shutdown_event.set()
+        except Exception:
+            pass
+
+        # Stop tray icon and cleanup non-Tk resources asap
+        try:
+            self.cleanup()
+        except Exception:
+            pass
+
+        def _finish():
+            # Cancel internal after callbacks if any
+            try:
+                if getattr(self, "_queue_poller_after_id", None):
+                    self.root.after_cancel(self._queue_poller_after_id)
+            except Exception:
+                pass
+            try:
+                if hasattr(self, "_countdown_after_id") and self._countdown_after_id:
+                    self.root.after_cancel(self._countdown_after_id)
+                    self._countdown_after_id = None
+            except Exception:
+                pass
+            # Try to quit/destroy Tk cleanly
+            try:
+                self.root.quit()
+            except Exception:
+                pass
+            try:
+                self.root.destroy()
+            except Exception:
+                pass
+
+        # Ensure Tk teardown runs on the Tk thread
+        self.call_tk(_finish)
+
+        # Guarantee process termination even if any non-daemon threads remain alive.
+        # This ensures the terminal command (python MagicInput.py) ends reliably for 'Send & Close'.
+        try:
+            threading.Thread(target=self._force_exit_watchdog, args=(700,), daemon=True).start()
+        except Exception:
+            try:
+                os._exit(0)
+            except Exception:
+                pass
+
+    def _force_exit_watchdog(self, delay_ms: int = 500) -> None:
+        """Force-terminate the process shortly after shutdown.
+
+        We allow a brief delay so Tk can process quit/destroy and stdout can flush.
+        If non-daemon threads prevent normal interpreter exit, we hard-exit.
+        """
+        try:
+            time.sleep(max(0, delay_ms) / 1000.0)
+        except Exception:
+            pass
+        try:
+            os._exit(0)
+        except Exception:
+            pass
 
     def _on_hover(self, button, entering):
         """Handle hover effect for buttons"""
@@ -1355,8 +1503,9 @@ class InputPopup:
 
         # Build tray menu
         menu = pystray.Menu(
-            pystray.MenuItem('Show', lambda: self.root.after(0, self._show_window), default=True),
-            pystray.MenuItem('Exit', lambda: self.root.after(0, self.root.destroy))
+            # Use thread-safe dispatcher to avoid calling Tk from pystray thread
+            pystray.MenuItem('Show', lambda *args: self.call_tk(self._show_window), default=True),
+            pystray.MenuItem('Exit', lambda *args: self.shutdown(source='tray'))
         )
 
         # Start the tray icon
@@ -1565,7 +1714,8 @@ class InputPopup:
         last = getattr(self, "_last_snippet_scan", 0)
         if now - last > 1.0:
             self._last_snippet_scan = now
-            threading.Thread(target=self._detect_snippet_files_thread).start()
+            t = threading.Thread(target=self._detect_snippet_files_thread, daemon=True)
+            t.start()
 
         # Live extraction of @file mentions to update summary
         self._extract_mentioned_files()
@@ -2934,7 +3084,25 @@ def main() -> None:
         root = tk.Tk()
 
     app = InputPopup(root)
-    root.protocol("WM_DELETE_WINDOW", lambda: (app.cleanup(), root.destroy()))
+    # Route window close through centralized shutdown
+    root.protocol("WM_DELETE_WINDOW", lambda: app.shutdown(source='wm_delete'))
+
+    # Signal handlers for graceful shutdown (Ctrl+C, termination, and Windows console break)
+    try:
+        signal.signal(signal.SIGINT, lambda s, f: app.shutdown(source='sigint'))
+    except Exception:
+        pass
+    try:
+        signal.signal(signal.SIGTERM, lambda s, f: app.shutdown(source='sigterm'))
+    except Exception:
+        pass
+    # SIGBREAK is Windows-specific; guard usage
+    if hasattr(signal, 'SIGBREAK'):
+        try:
+            signal.signal(signal.SIGBREAK, lambda s, f: app.shutdown(source='sigbreak'))
+        except Exception:
+            pass
+
     root.mainloop()
 
 
