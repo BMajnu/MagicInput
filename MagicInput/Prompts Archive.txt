@@ -1,3 +1,7 @@
+[2025-08-19 17:15:44] (from previous session)
+Prompt:
+sfsdf
+--------------------------------------------------
 [2025-08-18 15:23:11] (from previous session)
 Prompt:
 sfdsf
@@ -17,7 +21,7 @@ The provided image showcases the `MagicInput` application's main interface. At t
 
 Directly relevant to the request is the "Options" section, located beneath the image attachment area. This section is enclosed within a subtle border and labeled "-Options-". It contains a horizontal row of checkboxes and radio buttons. The checkboxes are: "Include context", "Project brief", "Prompts archive", and "Terminal". Currently, "Include context", "Project brief", and "Prompts archive" are checked, while "Terminal" is unchecked. To the right of the checkboxes are radio buttons for "Visionize modes": "Plan", "Describe", and "Combine". The "Describe" option is currently selected, indicated by the mouse cursor hovering over it. The "Combine" radio button is the last interactive element in this options row. The user's request is to add a "Preview" button immediately after this "Combine" button. Below the "Options" section is a large "Prompt" text area, followed by action buttons like "Terminal...", "Clear", "Refine", "Visionize & Send", "Visionize", "Send", and "Send & Close" at the very bottom of the window.
 
-## Plan
+`## Plan`
 
 1.  **UI Element Addition:** Add a new button labeled "Preview" to the "Options" section, positioned immediately after the "Combine" radio button.
 2.  **Event Handler Implementation:** Create a new Python function (e.g., `_show_context_preview`) that will be called when the "Preview" button is clicked.

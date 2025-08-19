@@ -48,6 +48,9 @@ python MagicInput.py
 *   **Theming:** Toggle between dark and light themes.
 *   **Settings Dialog:** Manage Gemini API keys (multiple with rotation), select model, and toggle auto-refine.
 *   **Drag-and-Drop:** Drop files/images onto the window (Windows uses `tkinterdnd2`).
+*   **Startup Sound:** Plays a short sound when the app opens (customizable WAV on Windows).
+*   **Custom Title Format:** Title shows `<codebase> - MagicInput - B Majnu (Developer)`.
+*   **Reliable Exit:** "Send & Close" sends the prompt, closes the window, and terminates the process.
 
 ## Visionize modes (Image Analysis)
 
@@ -113,6 +116,26 @@ Use the buttons: `Visionize` (generate into prompt) or `Visionize & Send` (gener
 *   **Model:** Choose the desired model in Settings.
 *   **Config File:** Preferences are saved to `MagicInput/config.json`.
 
+### Startup Sound (Windows)
+
+By default the app plays the WAV at:
+
+```
+e:\Developing Projects\MagicInput\Sound\mixkit-negative-tone-interface-tap-2569.wav
+```
+
+To change the sound, edit `InputPopup._play_start_sound()` in `MagicInput.py` and update `wav_path` to your desired `.wav` file. If the file is missing, the app falls back to the `SystemNotification` sound or a simple beep.
+
+### Window Title Format
+
+The window title is set dynamically to:
+
+```
+<codebase> - MagicInput - B Majnu (Developer)
+```
+
+`<codebase>` is the name of the folder where `MagicInput.py` is run. The same text is displayed in the custom title bar.
+
 ## Files & Storage
 
 - App data folder: `MagicInput/` (created beside `MagicInput.py`).
@@ -124,6 +147,7 @@ Use the buttons: `Visionize` (generate into prompt) or `Visionize & Send` (gener
 
 *   **Missing Dependencies:** If you encounter `ImportError` messages, ensure you have installed all dependencies using `pip install -r requirements.txt`.
 *   **UI Freezes/Lag:** If the application becomes unresponsive, it might be due to heavy operations. Ensure your system meets the minimum requirements and consider restarting the application.
+*   **Terminal Doesn’t Exit After Send & Close:** This has been addressed. If you still see the Python process lingering, ensure you’re on the latest code; the app now forces termination shortly after shutdown.
 
 ## Contributing
 

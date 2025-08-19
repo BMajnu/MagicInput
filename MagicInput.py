@@ -145,6 +145,11 @@ class InputPopup:
         self.current_photo: ImageTk.PhotoImage | None = None
         self.temp_dir = tempfile.mkdtemp()
         self.app_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+        # Apply composed title now that we know the running directory
+        try:
+            self._apply_title()
+        except Exception:
+            pass
         # Folder where all attachments and prompt logs are stored (hidden dot-folder)
         self.attachments_dir = os.path.join(self.app_dir, "MagicInput")
         os.makedirs(self.attachments_dir, exist_ok=True)
@@ -236,6 +241,58 @@ class InputPopup:
         except Exception:
             pass
 
+        # Play a short startup beep after the window initializes
+        try:
+            self.root.after(200, self._play_start_sound)
+        except Exception:
+            pass
+
+    def _play_start_sound(self) -> None:
+        """Play a short notification sound when the app opens."""
+        try:
+            if platform.system() == 'Windows':
+                try:
+                    import winsound  # type: ignore
+                    # Preferred: play the user-provided WAV if present
+                    wav_path = r"e:\\Developing Projects\\MagicInput\\Sound\\mixkit-negative-tone-interface-tap-2569.wav"
+                    played = False
+                    try:
+                        if os.path.isfile(wav_path):
+                            winsound.PlaySound(wav_path, winsound.SND_FILENAME | winsound.SND_ASYNC)
+                            played = True
+                    except Exception:
+                        played = False
+                    if not played:
+                        # Sweet, light system sound as fallback
+                        try:
+                            winsound.PlaySound("SystemNotification", winsound.SND_ALIAS | winsound.SND_ASYNC)
+                            played = True
+                        except Exception:
+                            played = False
+                    if not played:
+                        # Last resort fallbacks
+                        try:
+                            winsound.MessageBeep(winsound.MB_ICONASTERISK)
+                        except Exception:
+                            try:
+                                winsound.Beep(880, 120)
+                            except Exception:
+                                pass
+                except Exception:
+                    # As a last resort, try Tk bell
+                    try:
+                        self.root.bell()
+                    except Exception:
+                        pass
+            else:
+                # Cross-platform best-effort bell
+                try:
+                    self.root.bell()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
     # ------------------------------------------------------------------ UI BUILDERS
     def _configure_window(self) -> None:
         # App metadata
@@ -260,6 +317,23 @@ class InputPopup:
         self.title_font = ('Segoe UI', 12, 'bold')
         self.text_font = ('Consolas', 10)
         self.button_font = ('Segoe UI', 10)
+
+    def _apply_title(self) -> None:
+        """Set the window title to: '<codebase> - MagicInput - B Majnu (Developer)'."""
+        try:
+            codebase = os.path.basename(self.app_dir) if getattr(self, 'app_dir', None) else os.path.basename(os.getcwd())
+        except Exception:
+            codebase = ""
+        full_title = f"{codebase} - {self.app_name} - B Majnu (Developer)" if codebase else f"{self.app_name} - B Majnu (Developer)"
+        try:
+            self.root.title(full_title)
+        except Exception:
+            pass
+        try:
+            if hasattr(self, 'title_lbl'):
+                self.title_lbl.config(text=full_title)
+        except Exception:
+            pass
 
         style = ttk.Style()
         try:
@@ -673,6 +747,12 @@ class InputPopup:
                    self.info_btn, self.settings_btn, self.theme_btn, self.minimize_btn, self.close_btn):
             btn.bind("<Enter>", lambda e, b=btn: self._on_hover(b, True))
             btn.bind("<Leave>", lambda e, b=btn: self._on_hover(b, False))
+
+        # Ensure the custom title text is applied to the title label once it's created
+        try:
+            self._apply_title()
+        except Exception:
+            pass
 
     def _layout_widgets(self) -> None:
         # Title bar layout
@@ -2354,10 +2434,10 @@ class InputPopup:
             # Build required headings based on selection
             def _headings_for(m: str) -> list[str]:
                 if m == "plan":
-                    return ["## Overview", "## Plan"]
+                    return ["Overview:", "Plan:"]
                 if m == "describe":
-                    return ["## Overview", "## Describe Image"]
-                return ["## Overview", "## Describe Image", "## Plan"]
+                    return ["Overview:", "Describe Image:"]
+                return ["Overview:", "Describe Image:", "Plan:"]
 
             headings = _headings_for(sel_mode)
 
@@ -2397,8 +2477,8 @@ Write the answer in Markdown with EXACTLY the following section headings (and no
 
 Content requirements (adapt based on the nature of the USER REQUEST—UI/UX, debugging, backend functionality, feature implementation, or anything else what asking the user):
 - Overview: {overview_req}
-- Describe Image: {describe_req if '## Describe Image' in headings else 'Skip this section entirely.'}
-- Plan: {plan_req if '## Plan' in headings else 'Skip this section entirely.'}
+- Describe Image: {describe_req if 'Describe Image:' in headings else 'Skip this section entirely.'}
+- Plan: {plan_req if 'Plan:' in headings else 'Skip this section entirely.'}
 
 Constraints:
 - Base everything strictly on the provided image(s) and CONTEXT. If something is unknown, state it briefly in the relevant section.
@@ -2761,7 +2841,7 @@ Constraints:
         
         # Format the description professionally
         formatted_description = (
-            "\n\n## Analysis:\n"
+            "\n\nAnalysis:\n"
             f"{description.strip()}\n"
             "\n---\n"
             "*Analysis Generated by AI*"
