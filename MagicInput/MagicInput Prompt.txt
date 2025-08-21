@@ -1,2 +1,1 @@
-Prompt:
-Fixed. Thanks.
+sill waiting form user's prompt so run the command "timeout 30".

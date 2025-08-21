@@ -729,6 +729,19 @@ class InputPopup:
             command=self._on_prefs_changed
         )
 
+        self.include_footer_var = tk.BooleanVar(value=True)
+        self.include_footer_chk = tk.Checkbutton(
+            self.ctx_frame,
+            text="Footer",
+            variable=self.include_footer_var,
+            bg=self.current_theme["bg_primary"],
+            fg=self.current_theme["text_primary"],
+            selectcolor=self.current_theme["bg_primary"],
+            activebackground=self.current_theme["bg_primary"],
+            activeforeground=self.current_theme["text_primary"],
+            command=self._on_prefs_changed
+        )
+
         # Button to preload/paste terminal context
         self.terminal_ctx_btn = tk.Button(
             self.btn_frame,
@@ -799,6 +812,7 @@ class InputPopup:
         self.include_project_chk.pack(side=tk.LEFT, padx=(0,8))
         self.include_archive_chk.pack(side=tk.LEFT, padx=(0,8))
         self.include_terminal_chk.pack(side=tk.LEFT, padx=(0,8))
+        self.include_footer_chk.pack(side=tk.LEFT, padx=(0,8))
 
         # Text section
         self.text_label.pack(fill=tk.X, padx=10, pady=(0, 5), anchor="w")
@@ -830,6 +844,25 @@ class InputPopup:
         self.root.bind_all('<Control-Return>', lambda e: self._send_and_close())
         # Ctrl+V -> Paste image from clipboard
         self.root.bind_all('<Control-v>', lambda e: self._paste_clipboard_image())
+
+    def _on_toggle_include_context(self) -> None:
+        """Enable/disable per-context toggles based on Include context."""
+        try:
+            state = tk.NORMAL if self.include_context_var.get() else tk.DISABLED
+            for chk in (self.include_project_chk, self.include_archive_chk, self.include_terminal_chk):
+                chk.config(state=state)
+            term_btn_state = tk.NORMAL if (self.include_context_var.get() and self.include_terminal_var.get()) else tk.DISABLED
+            self.terminal_ctx_btn.config(state=term_btn_state)
+        except Exception:
+            pass
+
+    def _on_prefs_changed(self) -> None:
+        """Placeholder for persisting UI preferences; keeps dependent controls in sync."""
+        try:
+            term_btn_state = tk.NORMAL if (self.include_context_var.get() and self.include_terminal_var.get()) else tk.DISABLED
+            self.terminal_ctx_btn.config(state=term_btn_state)
+        except Exception:
+            pass
 
     def _enable_dnd(self) -> None:
         # Canvas accepts image files; text area accepts files whose contents are inserted.
@@ -1102,14 +1135,26 @@ class InputPopup:
 
         # Build footer sentence
         footer_line = ""
-        if footer_parts:
+        # If an image is present, use the requested phrasing instead of the previous generic line
+        if self.images:
+            footer_line = (
+                "Please take a screenshot of the current page to understand properly my requirements. "
+                "After analyzing it, start implementing."
+            )
+        elif footer_parts:
             if len(footer_parts) == 1:
                 parts_str = footer_parts[0]
             else:
                 parts_str = " and ".join(footer_parts)
             footer_line = f"read the {parts_str} (following the directory link) mentioned above."
 
-        if footer_line:
+        # Respect the Footer toggle; only append when enabled
+        try:
+            footer_enabled = bool(self.include_footer_var.get())
+        except Exception:
+            footer_enabled = True
+
+        if footer_line and footer_enabled:
             text = f"{text}\n{footer_line}" if text else footer_line
 
         lines: list[str] = []
@@ -1653,7 +1698,7 @@ class InputPopup:
         self.mode_frame.configure(bg=theme["bg_primary"])
 
         # Checkboxes
-        for chk in (self.include_context_chk, self.include_project_chk, self.include_archive_chk, self.include_terminal_chk):
+        for chk in (self.include_context_chk, self.include_project_chk, self.include_archive_chk, self.include_terminal_chk, self.include_footer_chk):
             chk.configure(
                 bg=theme["bg_primary"],
                 fg=theme["text_primary"],

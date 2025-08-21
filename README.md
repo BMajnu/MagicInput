@@ -40,6 +40,7 @@ python MagicInput.py
 *   **Clipboard Paste (Ctrl+V):** Paste an image from the system clipboard directly into attachments.
 *   **Visionize (Image + Text AI):** Describe/analyze attached images with modes: Plan, Describe, Combine.
 *   **Context Toggles:** Include Project brief, Prompts archive, and Terminal context when analyzing.
+*   **Footer Toggle:** Quickly include/exclude an informational footer line appended to your prompt. The footer adapts based on whether images or files are attached.
 *   **Prompt Refinement:** One-click AI-powered rewrite/refine of your prompt.
 *   **Visionize & Send:** Run analysis then immediately send the prompt.
 *   **Prompt Persistence:** Keeps only the latest prompt in `MagicInput/MagicInput Prompt.txt` and archives previous entries in `MagicInput/Prompts Archive.txt`.
@@ -78,6 +79,14 @@ Use the buttons: `Visionize` (generate into prompt) or `Visionize & Send` (gener
   - Project brief
   - Prompts archive
   - Terminal
+- **Footer toggle:** When enabled, MagicInput appends a footer line to the prompt. If images are attached, it adds:
+
+  "Please take a screenshot of the current page to understand properly my requirements. After analyzing it, start implementing."
+
+  Otherwise, it adds:
+
+  "read the [attachment types] (following the directory link) mentioned above."
+
 - The latest prompt is written to `MagicInput/MagicInput Prompt.txt`.
 - Older prompts are prepended to `MagicInput/Prompts Archive.txt` (newest-first) with timestamps and separators.
 - A status line shows “Waiting for prompt: Xs” with a count-up timer.
@@ -142,6 +151,7 @@ The window title is set dynamically to:
 - Logs: `MagicInput/debug.log` and `MagicInput/magicinput.log`.
 - Prompts: `MagicInput/MagicInput Prompt.txt` (latest), `MagicInput/Prompts Archive.txt` (history).
 - Attachments: files added are copied into the app data folder and referenced in the prompt.
+- Attachment path handling: inline mentions in the prompt use relative paths for readability, while the app uses absolute file paths internally when reading and sending attachments to AI APIs.
 
 ## Troubleshooting
 
